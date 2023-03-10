@@ -60,7 +60,8 @@ func CommitBlocksWithSigner(
 /*
 	CommitBlocks: commit blocks
 */
-func CommitBlocksWithNonce(authCli *rpc.AuthClient, instance *ZkBNB,
+func CommitBlocksWithNonce(
+	cli *rpc.ProviderClient, authCli *rpc.AuthClient, instance *ZkBNB,
 	lastBlock StorageStoredBlockInfo, commitBlocksInfo []OldZkBNBCommitBlockInfo,
 	gasPrice *big.Int, gasLimit uint64, nonce uint64,
 ) (txHash string, err error) {
@@ -201,6 +202,21 @@ func RevertBlocksWithSigner(
 	gasPrice *big.Int, gasLimit uint64,
 ) (txHash string, err error) {
 	transactOpts, err := ConstructTransactOptsWithSigner(cli, signer, address, gasPrice, gasLimit)
+	if err != nil {
+		return "", err
+	}
+	tx, err := instance.RevertBlocks(transactOpts, revertBlocks)
+	if err != nil {
+		return "", err
+	}
+	return tx.Hash().String(), nil
+}
+
+func RevertBlocksWithNonce(authCli *rpc.AuthClient, instance *ZkBNB,
+	revertBlocks []StorageStoredBlockInfo,
+	gasPrice *big.Int, gasLimit uint64, nonce uint64,
+) (txHash string, err error) {
+	transactOpts, err := ConstructTransactOptsWithNonce(authCli, gasPrice, gasLimit, nonce)
 	if err != nil {
 		return "", err
 	}
