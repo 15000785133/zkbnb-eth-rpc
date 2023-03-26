@@ -81,7 +81,7 @@ func CommitBlocksWithNonce(
 /*
 	CommitBlocks: commit blocks with kms signature parameters
 */
-func CommitBlocksWithNonceAndSigner(ctx context.Context, kmsSvc *kms.Client, keyId string, chainID *big.Int, address common.Address, instance *ZkBNB,
+func CommitBlocksWithNonceAndKms(ctx context.Context, kmsSvc *kms.Client, keyId string, chainID *big.Int, address common.Address, instance *ZkBNB,
 	lastBlock StorageStoredBlockInfo, commitBlocksInfo []OldZkBNBCommitBlockInfo,
 	gasPrice *big.Int, gasLimit uint64, nonce uint64,
 ) (txHash string, err error) {
@@ -159,7 +159,7 @@ func VerifyAndExecuteBlocksWithNonce(authCli *rpc.AuthClient, instance *ZkBNB,
 /*
 	VerifyAndExecuteBlocks: verify and execute blocks with kms signature parameters
 */
-func VerifyAndExecuteBlocksWithNonceAndSigner(ctx context.Context, kmsSvc *kms.Client, keyId string, chainID *big.Int, address common.Address, instance *ZkBNB,
+func VerifyAndExecuteBlocksWithNonceAndKms(ctx context.Context, kmsSvc *kms.Client, keyId string, chainID *big.Int, address common.Address, instance *ZkBNB,
 	verifyAndExecuteBlocksInfo []OldZkBNBVerifyAndExecuteBlockInfo, proofs []*big.Int,
 	gasPrice *big.Int, gasLimit uint64, nonce uint64,
 ) (txHash string, err error) {
@@ -197,7 +197,7 @@ func RevertBlocks(
 /*
 	RevertBlocks: revert blocks with signer kms signature parameters
 */
-func RevertBlocksWithSigner(
+func RevertBlocksWithKms(
 	cli *rpc.ProviderClient, ctx context.Context, kmsSvc *kms.Client, keyId string, chainID *big.Int, address common.Address, instance *ZkBNB,
 	revertBlocks []StorageStoredBlockInfo,
 	gasPrice *big.Int, gasLimit uint64,
@@ -231,7 +231,7 @@ func RevertBlocksWithNonce(authCli *rpc.AuthClient, instance *ZkBNB,
 /*
 	RevertBlocks: revert blocks with kms signature parameters
 */
-func RevertBlocksWithNonceAndSigner(ctx context.Context, kmsSvc *kms.Client, keyId string, chainID *big.Int, address common.Address, instance *ZkBNB,
+func RevertBlocksWithNonceAndKms(ctx context.Context, kmsSvc *kms.Client, keyId string, chainID *big.Int, address common.Address, instance *ZkBNB,
 	revertBlocks []StorageStoredBlockInfo,
 	gasPrice *big.Int, gasLimit uint64, nonce uint64,
 ) (txHash string, err error) {
